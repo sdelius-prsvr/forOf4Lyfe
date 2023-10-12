@@ -43,11 +43,23 @@ const makeFriendly = function(paragraph){
   return newParagraph
 }
 
+// const kylesMakeFriendly = function(str){
+//   let result = ''
+//   for(let char of str){
+//     if(char === '.'){
+//       result += '!'
+//     }else{
+//       result += char
+//     }
+//   }
+//   return result
+// }
+
 const cubeAll = function(numArr){
-  let newNumArray = []
-  for(let num of numArr){
-    num = num ** 3
-    newNumArray.push(num)
+  const newNumArray = []
+  for(const num of numArr){
+    newNum = num ** 3
+    newNumArray.push(newNum)
   }
   return newNumArray
 }
@@ -90,23 +102,62 @@ const dinos = [
 //   return statement
 // }
 
-const addNoises = function(noisyAnimals){
-  let statement = []
-  for (let noisyName of noisyAnimals){
-      if (dogs.includes(noisyName)){
-          statement.push(noisyName + ' says "Woof!"');
+const addNoises = function(animalArr){
+  let statementArr = []
+  for (let name of animalArr){
+      if (dogs.includes(name)){
+          statementArr.push(name + ' says "Woof!"');
       }
-      if (cats.includes(noisyName)){
-          statement.push(noisyName + ' says "Meow!"');
+      if (cats.includes(name)){
+          statementArr.push(name + ' says "Meow!"');
       }
-      if (dinos.includes(noisyName)){
-          statement.push(noisyName + ' says "ROWR."');
+      if (dinos.includes(name)){
+          statementArr.push(name + ' says "ROWR."');
       }
     }
-   return statement
+   return statementArr
 }
 
+// const addNoises = function(arr){
+//   let newArr = []
+//   for(let str of arr){
+//     switch(true){
+//       case dogs.includes(str):{
+//         newArr.push(str + ' says "Woof!"')
+//         break;
+//       }
+//       case cats.includes(str):{
+//         newArr.push(str + ' says "Meow!"')
+//         break;
+//       }
+//       case dinos.includes(str):{
+//         newArr.push(str + ' says "ROWR."')
+//         break;
+//       }
+//     }
+//   }
+//   return newArr
+// }
 
+// const newArray = []
+// for(const name of arr){
+//   switch(true){
+//     case dogs.includes(name):{
+//       newArray.push(name + ' says "Woof!"')
+//       break;
+//     }
+//     case cats.includes(name):{
+//       newArray.push(name + ' says "Meow!"')
+//       break;
+//     }
+//     case dinos.includes(name):{
+//       newArray.push(name + ' says "ROWR."')
+//       break;
+//     }
+//   }
+// }
+// return newArray
+// }
 
 /*********************************
  * OUR CODE BELOW; DO NOT TOUCH! *
@@ -138,6 +189,13 @@ if (typeof addNoises === 'undefined') {
   addNoises = undefined;
 }
 
+if (typeof womenOnly === 'undefined') {
+  womenOnly = undefined;
+}
+
+if (typeof integersOnly === 'undefined') {
+  integersOnly = undefined;
+}
 
 describe('addAll', () => {
   it(`adds all the numbers in the array`, () => {
@@ -314,3 +372,56 @@ describe('addNoises', () => {
     expect(() => addNoises = 500).toThrow();
   })
 })
+
+
+describe('womenOnly', () => {
+  it('should return an empty array if the input is an empty array', () => {
+    const input = [];
+    const result = womenOnly(input);
+    expect(result).toEqual([]);
+  });
+
+  it('should return an empty array if there are no female names', () => {
+    const input = ['John', 'Robert', 'Michael'];
+    const result = womenOnly(input);
+    expect(result).toEqual([]);
+  });
+
+  it('should return an array with female names only', () => {
+    const input = ['Alice F', 'Bob M', 'Charlie F', 'David M', 'Eve F'];
+    const result = womenOnly(input);
+    expect(result).toEqual(['Alice F', 'Charlie F', 'Eve F']);
+  });
+});
+
+describe('integersOnly', () => {
+  it('should return an empty array if the input is an empty array', () => {
+    const input = [];
+    const result = integersOnly(input);
+    expect(result).toEqual([]);
+  });
+
+  it('should return an empty array if there are no integers in the input', () => {
+    const input = [1.5, 2.25, 3.75];
+    const result = integersOnly(input);
+    expect(result).toEqual([]);
+  });
+
+  it('should return an array with only integers', () => {
+    const input = [1, 2, 3.0, 4.5, 5, 6.0];
+    const result = integersOnly(input);
+    expect(result).toEqual([1, 2, 3.0, 5, 6.0]); // 3.0 and 6.0 are considered integers
+  });
+
+  it('should handle negative integers', () => {
+    const input = [-1, -2, 3, -4.0, 5.5];
+    const result = integersOnly(input);
+    expect(result).toEqual([-1, -2, 3, -4.0]); // -4.0 is considered an integer
+  });
+
+  it('should handle a mix of integers and non-integers', () => {
+    const input = [2.75, 4, -3.8, 6, 9.0, 11];
+    const result = integersOnly(input);
+    expect(result).toEqual([4, 6, 9.0, 11]); // 9.0 is considered an integer
+  });
+});
