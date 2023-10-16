@@ -159,6 +159,27 @@ const addNoises = function(animalArr){
 // return newArray
 // }
 
+
+const womenOnly = function(namesArr){
+  let womenArr = []
+  for (let name of namesArr){
+    if (name.endsWith('F')){
+      womenArr.push(name);
+    }
+  }
+  return womenArr
+}
+
+const integersOnly = function(numArr){
+  let intArr = []
+  for (let num of numArr){
+    if (num % 1 === 0){
+      intArr.push(num)
+    }
+  }
+  return intArr
+}
+
 /*********************************
  * OUR CODE BELOW; DO NOT TOUCH! *
  *********************************/
